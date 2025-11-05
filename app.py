@@ -21,6 +21,7 @@ import re
 from flask_wtf import CSRFProtect
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 load_dotenv()
 
@@ -42,6 +43,9 @@ app.config.setdefault("SESSION_COOKIE_SAMESITE", "Lax")    # mitigate CSRF from 
 
 # Disable debug in production - if you're testing locally, set to True; ensure False for deployment
 app.config.setdefault("DEBUG", False)
+
+# Trust reverse proxy headers from Render so scheme/host are correct
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1)
 
 # ---------- Initialize extensions ----------
 csrf = CSRFProtect(app)  # adds CSRF protection for forms (requires {{ csrf_token() }} in your forms)
@@ -99,7 +103,8 @@ def set_security_headers(response):
     response.headers['X-Content-Type-Options'] = 'nosniff'  # prevent MIME sniffing
     # Minimal CSP - allow only same origin resources (adjust if you use external scripts/CDNs)
     response.headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
-    response.headers['Referrer-Policy'] = 'no-referrer'
+    # Allow same-origin referrers so CSRF protection can validate secure requests
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
     return response
 
 # ---------- Routes ----------
