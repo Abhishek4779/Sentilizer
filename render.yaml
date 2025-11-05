@@ -2,7 +2,7 @@ services:
   - type: web
     name: Sentilizer
     env: python
-    pythonVersion: 3.11
+    pythonVersion:  3.11.8
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
     envVars:
