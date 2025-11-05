@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Home | Sentiment Analyzer{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <h1>Uncover the <span class="highlight-emotion">Emotions</span> Behind Every Word</h1>
+    <p>Reveal what your audience truly feels with real-time <span class="highlight-ai">AI-powered</span> sentiment analysis.</p>
+    <a href="#analyze" class="cta-btn">Try Now</a>
+  </div>
+</section>
+
+<!-- === ANALYZE SECTION === -->
+<section id="analyze" class="analyze">
+  <h2>Reveal the sentiment hidden within your text</h2>
+
+  <form action="{{ url_for('analyze') }}" method="POST" class="analyze-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <textarea name="text" placeholder="Type your sentence or paragraph here..." required></textarea>
+    <button type="submit">Analyze</button>
+  </form>
+
+  {% if result %}
+  <div class="result fade-in">
+    <h3>Result:</h3>
+    <p class="{{ result_class }}">{{ result }}</p>
+  </div>
+  {% endif %}
+
+  <!-- Flash messages (like empty text warnings) -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <p class="{{ category }}">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</section>
+
+<!-- === HOW IT WORKS === -->
+<section class="how-it-works">
+  <h2>How It Works ?</h2>
+  <div class="steps">
+    <div class="step">
+      <span>🧠</span>
+      <h3>AI-Driven Sentiment Detection</h3>
+      <p>Trained using advanced NLP techniques like TF-IDF and Logistic Regression, our model delivers precise emotion classification.</p>
+    </div>
+    <div class="step">
+      <span>⚙️</span>
+      <h3>Instant & Secure Processing</h3>
+      <p>Your text is analyzed in real time via a Flask-powered backend, ensuring both speed and data security.</p>
+    </div>
+    <div class="step">
+      <span>📊</span>
+      <h3>Transparent Confidence Metrics</h3>
+      <p>Each prediction includes a confidence score, giving you clear insights into model reliability.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

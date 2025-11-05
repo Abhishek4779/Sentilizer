@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard | Sentiment Analyzer{% endblock %}
+
+{% block content %}
+<section class="auth">
+  <h1>Welcome, {{ current_user.username }} 👋</h1>
+  <p>Here’s your personal dashboard. Manage your account and start analyzing sentiments right away!</p>
+
+  <div class="about-cards">
+    <div class="card">
+      <div class="icon">💬</div>
+      <h3>Analyze Sentiments</h3>
+      <p>Start analyzing your text instantly and get emotion-based insights.</p>
+      <a href="{{ url_for('home') }}" class="cta-btn">Go to Analyzer</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">⚙️</div>
+      <h3>Profile Settings</h3>
+      <p>Update your account details and manage your preferences.</p>
+      <a href="#" class="cta-btn">Coming Soon</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">🚪</div>
+      <h3>Logout</h3>
+      <p>End your session safely and return anytime.</p>
+      <a href="{{ url_for('logout') }}" class="cta-btn">Logout</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

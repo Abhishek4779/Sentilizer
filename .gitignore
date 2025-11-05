@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Virtual environments
+venv/
+env/
+myvenv/
+.venv/
+Myvenv*/
+
+# Environment variables
+.env
+
+# Instance folder (contains SQLite DB, local files)
+instance/
+
+# VSCode, PyCharm, and system files
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+*.log
+
+# Cache / Build
+*.egg-info/
+dist/
+build/

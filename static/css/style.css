@@ -1,0 +1,773 @@
+/* === FULL RESPONSIVE CSS FOR SENTILIZER === */
+
+/* === GLOBAL STYLES === */
+:root{
+  --accent: #00bcd4;
+  --accent-2: #00c6ff;
+  --muted: #9aa6b2;
+  --card-border: rgba(96, 161, 204, 0.8);
+  --glass: rgba(255,255,255,0.03);
+}
+
+* { box-sizing: border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+html,body { height:100%; }
+
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url(/static/images/5630939.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  /* optional: fixed creates parallax-like background on desktop, may disable for mobile */
+  background-attachment: fixed;
+  color: #333;
+  overflow-x: hidden; /* prevent horizontal scroll */
+}
+
+/* ensure images are responsive */
+img { max-width: 100%; height: auto; display: block; }
+
+/* === NAVBAR === */
+.navbar {
+  background: black;
+  color: #fff;
+  padding: 10px 0;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  align-items: center;
+}
+
+.navbar .container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  color: var(--accent);
+  font-size: 1.8rem;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.nav-list li {
+  margin-left: 20px;
+}
+
+.nav-list a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
+  display: inline-block;
+  padding: 6px 4px;
+}
+
+.nav-list a:hover {
+  color: var(--accent);
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  user-select: none;
+  background: transparent;
+  border: none;
+}
+
+/* auth buttons in navbar (login/signup) */
+.nav-list a[href*="login"],
+.nav-list a[href*="signup"] {
+  color: #fff;
+  border: 1px solid var(--accent);
+  padding: 5px 12px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.nav-list a[href*="login"]:hover,
+.nav-list a[href*="signup"]:hover {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+/* dashboard / logout */
+.nav-list a[href*="dashboard"],
+.nav-list a[href*="logout"] {
+  color: #fff;
+  font-weight: 500;
+}
+
+.nav-list a[href*="logout"]:hover {
+  color: #ff4d4d;
+}
+
+/* active nav link */
+.nav-list a.active {
+  color: var(--accent);
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 3px;
+}
+
+/* mobile nav hidden by default for small screens - controlled below in media queries */
+.nav-list.active { display: flex; }
+
+/* === MAIN CONTENT === */
+.main-content {
+  width: 90%;
+  margin: 100px auto 40px auto; /* space for fixed navbar */
+  min-height: 70vh;
+}
+
+/* === FOOTER === */
+.footer {
+  background-color: #222;
+  color: #ccc;
+  text-align: center;
+  padding: 0.9rem;
+}
+
+/* === FORMS === */
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+textarea, input {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+button {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+}
+
+button:hover { background-color: #0097a7; }
+
+/* === SENTIMENT RESULT COLORS (legacy classes preserved) === */
+.positive { color: green; font-weight: bold; }
+.negative { color: red; font-weight: bold; }
+.neutral  { color: #555; font-weight: bold; }
+
+/* === HERO SECTION === */
+.hero {
+  color: white;
+  text-align: center;
+  padding: 100px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-content { max-width: 700px; }
+
+.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: white;
+  color: #0072ff;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.cta-btn:hover { background: #f2f2f2; }
+
+/* === ANALYZE SECTION === */
+.analyze {
+  text-align: center;
+  padding: 60px 20px;
+  width: 100%;
+  background: transparent;
+}
+
+.analyze h2 {
+  font-size: 2.8rem;
+  margin-bottom: 25px;
+  color: #fff;
+}
+
+.analyze-form textarea {
+  width: 95%;
+  max-width: 600px;
+  height: 120px;
+  padding: 15px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  resize: none;
+  margin-bottom: 15px;
+  background-color: #000;
+  color: #eee;
+}
+
+.analyze-form button {
+  padding: 10px 25px;
+  background: var(--accent-2);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.analyze-form button:hover { background: #0099ff; }
+
+.result { margin-top: 20px; }
+
+.result span { font-weight: 700; padding: 5px 10px; border-radius: 8px; }
+
+/* === HOW IT WORKS SECTION === */
+.how-it-works {
+  padding: 60px 20px;
+  text-align: center;
+  width: 100%;
+  background: transparent;
+}
+
+.how-it-works h2 { font-size: 2rem; margin-bottom: 20px; color: white; }
+
+.steps {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.step {
+  padding: 25px;
+  border: 2px solid var(--card-border);
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(55,165,164,0.1);
+  width: 220px;
+  transition: transform 0.3s ease;
+  color: #fff;
+}
+
+.step:hover { transform: translateY(-5px); }
+
+.step span { font-size: 2rem; display: block; margin-bottom: 10px; }
+
+/* === ABOUT SECTION === */
+.about-section {
+  background: transparent;
+  padding: 60px 0;
+  color: #333;
+}
+
+.about-section .container { width: 85%; margin: 0 auto; text-align: center; }
+
+.about-section h1 {
+  font-size: 2.8rem;
+  margin-bottom: 25px;
+  font-weight: 700;
+  color: #eee;
+}
+
+.about-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #fff;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* ==== Cards Section ==== */
+.about-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin: 50px 0;
+}
+
+.about-cards .card {
+  background: transparent;
+  border: 2px solid var(--card-border);
+  border-radius: 15px;
+  box-shadow: 0 4px 12px var(--card-border);
+  padding: 30px;
+  width: 250px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-cards .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+.about-cards .icon {
+  font-size: 2.5rem;
+  background-color: #e6f0ff;
+  color: #007bff;
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-cards h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* List styling inside cards */
+.about-cards ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.about-cards ul li {
+  color: #fff;
+  font-size: 0.95rem;
+  margin: 8px 0;
+  padding-left: 25px;
+  position: relative;
+  line-height: 1.5;
+}
+
+/* custom check */
+.about-cards ul li::before {
+  content: "✔";
+  color: #61a1cc;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* ==== Why Section ==== */
+.why-section {
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  border-radius: 15px;
+  padding: 40px;
+  margin-top: 50px;
+  text-align: left;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.why-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.why-section ul { list-style: disc; padding-left: 30px; }
+
+.why-section li {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.why-section strong { color: orange; }
+
+/* === SERVICES SECTION === */
+.services-section {
+  background: transparent;
+  padding: 60px 0;
+  color: #333;
+}
+
+.services-section .container {
+  width: 85%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.services-section h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.services-section .intro-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #fff;
+  max-width: 800px;
+  margin: 0 auto 50px;
+}
+
+/* Service Cards */
+.service-cards {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.service-cards .card {
+  background-color: transparent;
+  border-radius: 15px;
+  border: 2px solid var(--card-border);
+  padding: 30px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 4px 10px var(--card-border);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-cards .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+.service-cards .icon {
+  font-size: 2.8rem;
+  background-color: #e3f2fd;
+  color: #007bff;
+  width: 75px;
+  height: 75px;
+  margin: 0 auto 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-cards h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.service-cards p {
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Extra Services List */
+.extra-services {
+  margin-top: 60px;
+  text-align: left;
+  background: transparent;
+  border-radius: 15px;
+  padding: 40px;
+}
+
+.extra-services h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #fff;
+  text-align: center;
+}
+
+.extra-services ul {
+  list-style: none;
+  padding: 0;
+}
+
+.extra-services li {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  padding-left: 25px;
+  position: relative;
+  color: #fff;
+}
+
+.extra-services li::before {
+  content: "✔";
+  color: var(--accent);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+/* === CONTACT === */
+.contact {
+  text-align: center;
+  padding: 60px 20px;
+  background: transparent;
+}
+
+.contact h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.contact p {
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+/* === FLASH MESSAGES === */
+.success {
+  color: #00ff7f;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 15px;
+  font-size: 1.1rem;
+}
+
+.error {
+  color: #ff4d4d;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 15px;
+  font-size: 1.1rem;
+}
+
+/* === AUTH === */
+.auth {
+  text-align: center;
+  padding: 80px 20px;
+  color: #fff;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: rgba(0,0,0,0.5);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.auth-form input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--accent);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.auth-form button:hover { background-color: #0097a7; }
+
+.auth a { color: var(--accent); text-decoration: none; }
+.auth a:hover { text-decoration: underline; }
+
+/* === FLASH / RESULT ANIMATIONS & STYLING === */
+.fade-in { animation: fadeIn 0.8s ease-in-out; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === RESULT STYLING (detailed) === */
+.result { margin-top: 25px; text-align: center; }
+
+.result h3 {
+  font-size: 1.6rem;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.result p {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* Positive result style (more specific) */
+.result .positive {
+  color: #00ff6a;
+  background: rgba(0,255,106,0.1);
+  border: 2px solid #00ff6a;
+}
+
+/* Negative result style */
+.result .negative {
+  color: #ff4444;
+  background: rgba(255,68,68,0.1);
+  border: 2px solid #ff4444;
+}
+
+/* Highlight gradients */
+.highlight-emotion {
+  background: linear-gradient(90deg, #00bcd4, #0091ea);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+.highlight-ai {
+  background: linear-gradient(90deg, #ff4081, #ff9100);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+.clored-words {
+  background: linear-gradient(90deg, #ff4081, #ff9100);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+/* === About / Service / Card responsiveness (original breakpoints preserved) === */
+@media (max-width: 768px) {
+  .about-cards { flex-direction: column; align-items: center; }
+  .about-cards .card { width: 90%; }
+  .about-section p { text-align: left; }
+
+  .service-cards { flex-direction: column; align-items: center; }
+  .service-cards .card { width: 90%; }
+
+  .extra-services { padding: 25px; }
+}
+
+/* original mobile navbar behavior (kept at 786px to match your earlier rule) */
+@media (max-width: 786px) {
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    background-color: #222;
+    width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: 20px;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding: 15px 0;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    z-index: 900;
+  }
+
+  .nav-list li { margin: 15px 0; }
+  .menu-toggle { display: block; }
+
+  /* small tweak for nav links on mobile */
+  .nav-list a { font-size: 1.15rem; padding: 8px 12px; display:block; }
+}
+
+/* Additional responsive refinements for medium screens */
+@media (max-width: 992px) {
+  .navbar .container { flex-wrap: wrap; gap: 10px; }
+  .nav-list { display: none; flex-direction: column; background-color: #111; width: 100%; position: absolute; top: 60px; left:0; text-align:center; }
+  .nav-list.active { display:flex; }
+  .menu-toggle { display:block; }
+  .nav-list li { margin: 15px 0; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero p { font-size: 1rem; }
+  .about-cards .card, .service-cards .card { width: 90%; }
+}
+
+/* smallest screens */
+@media (max-width: 600px) {
+  .navbar { height:auto; padding: 8px 0; }
+  .logo a { font-size: 1.5rem; }
+  .hero { padding: 100px 10px 60px; }
+  .hero h1 { font-size: 1.8rem; }
+  .hero p { font-size: 0.95rem; }
+  .cta-btn { padding: 10px 20px; font-size: 0.9rem; }
+  form { width: 90%; padding: 15px; }
+  textarea, input { font-size: 0.95rem; }
+  .footer { font-size: 0.9rem; }
+  .why-section { flex-direction: column; padding: 20px; }
+  .why-section h2 { text-align: center; }
+  .about-section .container { width: 95%; }
+}
+
+/* tiny screens */
+@media (max-width: 420px) {
+  .nav-list a { font-size: 1rem; }
+  .hero h1 { font-size: 1.6rem; }
+  .analyze h2 { font-size: 1.8rem; }
+  .result p { font-size: 1.1rem; padding: 8px 12px; }
+}
+
+/* small utility classes */
+.text-center { text-align: center; }
+.m-0 { margin: 0; }
+.p-0 { padding: 0; }
+
+/* End of CSS */

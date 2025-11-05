@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}About | Sentiment Analyzer{% endblock %}
+
+{% block content %}
+<section class="about-section">
+  <div class="container">
+    <h1>About This Project</h1>
+
+    <p><strong>Sentilizer</strong> is a full-stack sentiment analysis web application that analyzes the emotional tone behind text — particularly tweets — using advanced Natural Language Processing (NLP) and Machine Learning (ML) models.
+    It combines span <strong><span class="clored-words">Python, Flask, HTML, CSS, JavaScript, </span> and <span class="clored-words">SQLAlchemy</span></strong> to deliver accurate, real-time insights in a secure and responsive interface.</p>
+    <p>The core model was trained on over <strong>1.5 million tweets</strong> using <span class="clored-words"><strong>Logistic Regression</strong></span> and <span class="clored-words"><strong>Multinomial Naive Bayes</strong></span>, where Logistic Regression achieved the best accuracy. Both the model (<code>lg_reg.pkl</code>) and TF-IDF vectorizer (<code>tfidf.pkl</code>) were deployed for real-time text analysis through a Flask API.</p>
+    <p>The backend integrates user authentication and database operations through <strong>Flask</strong> and <strong>SQLAlchemy</strong>, ensuring encrypted storage for user credentials. The frontend, designed using <strong>HTML, CSS, and JavaScript</strong>, provides an intuitive experience tailored for desktop users.</p>
+
+    <div class="about-cards">
+      <div class="card">
+        <div class="icon">🎯</div>
+        <h3>Tech Stack & Development</h3>
+        <ul>
+          <li><strong>Python</strong> – Data processing & ML model training</li>
+          <li><strong>Flask</strong> – RESTful backend API and app routing</li>
+          <li><strong>SQLAlchemy</strong> – ORM-based secure database management</li>
+          <li><strong>HTML, CSS, JavaScript</strong> – Responsive frontend UI</li>
+          <li><strong>Scikit-learn</strong> – Model training and evaluation</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="icon">🧩</div>
+        <h3>System Design & Architecture</h3>
+        <ul>
+          <li>Machine Learning model (trained & serialized)</li>
+          <li>Flask backend (API endpoints for analysis & authentication)</li>
+          <li>Database layer (user management via SQLAlchemy)</li>
+          <li>Frontend interface (text input, prediction results, and UX design)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="icon">🔒</div>
+        <h3>Security & Best Practices</h3>
+        <ul>
+          <li>Passwords stored using encryption</li>
+          <li>Validated user input and safe API calls</li>
+          <li>SQLAlchemy ORM to prevent SQL injection</li>
+          </li><li>Flask session management for user login control</li>
+        </ul>
+      </div>
+    </div>
+    
+
+
+    <div class="why-section">
+      <h2>Why Sentiment Analysis Matters</h2>
+      <ul>
+        <li><strong>Brand Monitoring:</strong> Track how customers feel about your products and services in real time.</li>
+        <li><strong>Market Research:</strong> Understand public opinion and trends to inform business strategies.</li>
+        <li><strong>Customer Service:</strong> Identify and prioritize negative feedback to improve customer satisfaction.</li>
+        <li><strong>Content Strategy:</strong> Measure audience reactions to optimize your content and messaging.</li>
+      </ul>
+    </div>
+  </div>
+  
+  
+</section>
+{% endblock %}
+
+

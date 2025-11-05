@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Contact | Sentiment Analyzer{% endblock %}
+
+{% block content %}
+<section class="contact">
+  <h1>Contact Us</h1>
+  <p>If you’d like to reach out, feel free to send a message below.</p>
+
+  <form action="{{ url_for('contact') }}" method="POST" class="contact-form">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, msg in messages %}
+        <p class="{{ category }}">{{ msg }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</section>
+{% endblock %}
