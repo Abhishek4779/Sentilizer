@@ -1,4 +1,5 @@
 import os
+import secrets
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -14,9 +15,8 @@ os.makedirs(INSTANCE_DIR, exist_ok=True)
 
 class Config:
     # === SECRET KEY ===
-    SECRET_KEY = os.getenv("SECRET_KEY")
-    if not SECRET_KEY:
-        raise ValueError("⚠️ SECRET_KEY not set in .env — please add it for security.")
+    SECRET_KEY = os.getenv("SECRET_KEY") or secrets.token_urlsafe(32)
+    # Auto-generate if not set (for easier deployment)
 
     # === DATABASE CONFIGURATION ===
     # Prefer PostgreSQL if DATABASE_URL is provided (Render), otherwise use local SQLite
