@@ -260,7 +260,9 @@ def analyze():
 
     return render_template('home.html', result=result, result_class=result_class)
 
-# ---------- Run ----------
-if __name__ == '__main__':
-    # For local dev you can set app.run(debug=True), but ensure debug is False in production
-    app.run(debug=app.config.get("DEBUG", False))
+
+if __name__ == "__main__":
+    # Use the port provided by Render, default to 5000 for local dev
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=app.config.get("DEBUG", False))
+
