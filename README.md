@@ -28,14 +28,6 @@ It offers a secure and responsive interface for real-time sentiment analysis.
 **Database:**  
 - SQLite (for local development)  
 - PostgreSQL (for deployment)
-
----
-
-## 🌐 Deployment
-
-The project is deployed on **Render**.  
-👉 **Live Demo:** [Visit Sentilizer](https://sentilizer2.onrender.com/)
-
 ---
 
 ## 👨‍💻 Author
